@@ -66,13 +66,16 @@ Whole match (graded frames): v1 labels 24.8% dead, 170 possessions, median 22.7 
 - v1 is better frame by frame (the dead-ball detector is the reason) but **too sticky between teams**: far fewer possessions than a real match has. Control evidence exists on only 30.5% of graded frames, so a switch cost of 40 needs about 5 s of uninterrupted evidence.
 - **Ball-fill model:** median error 10.4 m against 20.3 m for the player centroid (5-fold, time-blocked), but the team of the player nearest to the estimated ball matches the true one only 43 to 47% of the time (chance level). It is a coarse location estimate, not possession evidence, so v1 does not use it.
 
-## Rules we must keep (summary of `RULES.md`)
+## Rules we must keep (the organisers' clarification of 3 Nov overrides `RULES.md`)
 
-- Labels come only from an algorithm. No hand labels on this match, no frame-specific rules.
-- The public 5-minute ground truth is for checking that the pipeline lines up, not for training or tuning. Report it with its intervals.
-- No human-made data about this match from any source.
-- Never commit or publish the match data or anything derived from it (`C:\mtah-work` stays out of git).
+- **Not allowed:** checking our output against the video; hand labels or any manually made data on the provided game; uploading the provided data to AI services; training, fitting or calibrating on the ground-truth possession data or on the provided video.
+- **Allowed:** automatic checks using only the provided data; studying the data and the video to understand what counts as possession; using the video, tracking and Smart Tagging as inputs; any dataset we have the rights to use.
+- **Training and tuning:** anything trained or tuned must use external data only, never the ground truth or the provided video.
+- The public 5-minute ground truth is for checking that the pipeline lines up, never for choosing between versions or setting parameters. Report it with its intervals.
+- Never commit or publish the match data or anything derived from it (the work directory stays out of git).
 - The final repo must regenerate the exact submission file. v1 has no randomness; the ball-fill model uses `random_state=0`.
+
+Status of our own code under these rules: the constants in `v1.py` were set by football reasoning after inspecting the provided tracking and tagging (allowed), not fitted on the ground truth or the video. The ball-fill model is trained on this match's own tracking (self-supervised, no labels); whether that counts as training on "external data only" is being clarified with the organisers, and it is not used by version 1.
 
 ## Not done yet
 
