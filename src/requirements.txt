@@ -1,0 +1,7 @@
+# Versions used on the PC (Python 3.11.9, Windows 11). Install into the project venv:
+#   .venv\Scripts\python.exe -m pip install -r src\requirements.txt
+numpy==2.4.6
+pandas==3.1.0
+scikit-learn==1.9.1     # only ballfill.py needs this
+kloppy==3.18.0          # only the organisers' notebooks need this
+matplotlib              # only the organisers' notebooks need this
